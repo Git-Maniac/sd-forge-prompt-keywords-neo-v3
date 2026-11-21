@@ -1,6 +1,6 @@
-# Randomizer Keywords
+# Prompt Keywords
 
-This extension for stable-diffusion-webui adds some keywords using the extra networks syntax to allow randomization of parameters when combined with the [Dynamic Prompts](https://github.com/adieyal/sd-dynamic-prompts/tree/main/sd_dynamic_prompts) extension.
+This extension for stable-diffusion-webui forge-neo adds some keywords using the extra networks syntax to allow randomization of parameters when combined with the [sd-webui-forge-neo](https://github.com/Haoming02/sd-webui-forge-classic) extension.
 
 ## Example
 
