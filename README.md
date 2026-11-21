@@ -1,4 +1,8 @@
-# Prompt Keywords
+# Prompt Keywords v3
+
+This is a fork of <https://github.com/InfluxOW/a1111-stable-diffusion-webui-randomizer-keywords/pull/1/files#diff-81cfdc065b5f0f3c89277b2269e1606386d2d07fed2ba5027a4dbe46d1ffd424>
+
+Thanks to InfluxOW and space-nuko!
 
 This extension for stable-diffusion-webui forge-neo adds some keywords using the extra networks syntax to allow randomization of parameters when combined with the [sd-webui-forge-neo](https://github.com/Haoming02/sd-webui-forge-classic) extension.
 
