@@ -1,4 +1,4 @@
-# Prompt Keywords v3
+# Prompt Keywords V3
 
 This extension for stable-diffusion-webui (Forge Neo) adds keywords using the extra networks syntax. They let you set generation parameters from inside the prompt, and allow randomization of those parameters when combined with the [Dynamic Prompts](https://github.com/adieyal/sd-dynamic-prompts/tree/main/sd_dynamic_prompts) extension.
 
