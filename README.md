@@ -43,12 +43,17 @@ The extension adds the following special keywords to be used in prompts:
 - `<s_tmin:0>` - Sigma Min
 - `<s_tmax:0>` - Sigma Max
 - `<s_noise:1>` - Sigma Noise
+- `<s_min_uncond:0>` - Minimum Uncond Sigma
 - `<eta:0.5>` - Eta
 - `<ddim_discretize:quad>` - DDIM Discretize
 - `<denoising_strength:0.7>` - Denoising Strength
 - `<hr_scale:2>` - Hires. Fix Upscale By (txt2img)
 - `<hr_upscaler:Latent>` - Hires. Fix Upscaler (txt2img)
 - `<hr_second_pass_steps:10>` - Hires. Fix Steps (txt2img)
+- `<hr_cfg:3>` - Hires. Fix CFG Scale (txt2img)
+- `<hr_distilled_cfg:3.5>` - Hires. Fix Distilled CFG Scale (txt2img)
+- `<hr_sampler_name:Euler>` - Hires. Fix Sampler (txt2img)
+- `<hr_scheduler:Karras>` - Hires. Fix Scheduler (txt2img)
 - `<hr_resize_x:1024>` - Hires. Fix Resize Width To (txt2img)
 - `<hr_resize_y:1024>` - Hires. Fix Resize Height To (txt2img)
 - `<mask_blur:2>` - Mask Blur (img2img)

@@ -300,6 +300,7 @@ all_keywords = [
     SettingKeyword("s_tmin", float),
     SettingKeyword("s_tmax", float),
     SettingKeyword("s_noise", float),
+    SettingKeyword("s_min_uncond", float),
     SettingKeyword("eta", float, minimum=0),
     SettingKeyword("ddim_discretize", str),
     SettingKeyword("denoising_strength", float),
@@ -307,6 +308,10 @@ all_keywords = [
     SettingKeyword("hr_scale", float, minimum=1, only_for=Txt2Img),
     SettingKeyword("hr_upscaler", str, only_for=Txt2Img),
     SettingKeyword("hr_second_pass_steps", int, minimum=1, only_for=Txt2Img),
+    SettingKeyword("hr_cfg", float, minimum=1, only_for=Txt2Img),
+    SettingKeyword("hr_distilled_cfg", float, minimum=0, only_for=Txt2Img),
+    SettingKeyword("hr_sampler_name", str, check=check_sampler_name, only_for=Txt2Img),
+    SettingKeyword("hr_scheduler", str, check=check_scheduler_name, only_for=Txt2Img),
     SettingKeyword("hr_resize_x", int, minimum=64, adjust=round_down_to_8, only_for=Txt2Img),
     SettingKeyword("hr_resize_y", int, minimum=64, adjust=round_down_to_8, only_for=Txt2Img),
     # img2img only
