@@ -17,6 +17,7 @@
 # - Keywords are applied once per batch, using only the first prompt of the batch.
 # - If a keyword appears several times, only the first one counts.
 
+import os
 import re
 
 from modules import (
@@ -397,6 +398,91 @@ class Script(scripts.Script):
 
 
 # ---------------------------------------------------------------------------
+# Data for the autocomplete popup (javascript/prompt_keywords_autocomplete.js)
+# ---------------------------------------------------------------------------
+
+
+def value_choices(name):
+    # Possible values of a keyword, shown in the popup after "<name:". Empty list = free input.
+    if name == "checkpoint":
+        return sorted(info.name_for_extra for info in sd_models.checkpoints_list.values())
+    if name in ("sampler_name", "hr_sampler_name"):
+        return [sampler.name for sampler in sd_samplers.samplers]
+    if name in ("scheduler", "hr_scheduler"):
+        return [scheduler.label for scheduler in sd_schedulers.schedulers]
+    if name == "hr_upscaler":
+        return [upscaler.name for upscaler in shared.sd_upscalers]
+    if name == "ddim_discretize":
+        return ["uniform", "quad"]
+    return []
+
+
+def value_previews(name):
+    # Preview images for the values of a keyword: {value: image url}. Only checkpoints have them.
+    # They are the same images the "Checkpoints" tab shows (name.png or name.preview.png).
+    if name != "checkpoint":
+        return {}
+
+    # Imported here because the extra networks page may not exist yet when the script loads
+    from modules import ui_extra_networks
+
+    page = None
+    for candidate in ui_extra_networks.extra_pages:
+        if candidate.name == "checkpoints":
+            page = candidate
+    if page is None:
+        return {}
+
+    previews = {}
+    for info in sd_models.checkpoints_list.values():
+        path = os.path.splitext(info.filename)[0]
+        url = page.find_preview(path)
+        if url:
+            # "./sd_extra_networks/..." -> "/sd_extra_networks/..."
+            previews[info.name_for_extra] = url.lstrip(".")
+    return previews
+
+
+def keyword_info(keyword):
+    # Describes one keyword for the popup: its name, a short type text and where it works
+    if isinstance(keyword, SettingKeyword):
+        type_text = TYPE_TEXTS.get(keyword.value_type, "text")
+        if keyword.only_for is Txt2Img:
+            where = "txt2img"
+        elif keyword.only_for is Img2Img:
+            where = "img2img"
+        else:
+            where = ""
+    else:
+        type_text = "text"
+        where = ""
+
+    values = value_choices(keyword.name)
+    if type_text == "true/false":
+        values = ["true", "false"]
+
+    return {
+        "name": keyword.name,
+        "type": type_text,
+        "where": where,
+        "values": values,
+        "previews": value_previews(keyword.name),
+    }
+
+
+# Short type names for the popup (value_type function -> text)
+TYPE_TEXTS = {int: "int", float: "float", str: "text", to_bool: "true/false"}
+
+
+def add_api(app):
+    # The popup loads its keyword list from here, so the list only exists once (all_keywords)
+    @app.get("/prompt_keywords/keywords")
+    def get_keywords():
+        # Sorted alphabetically for the popup (all_keywords itself keeps its order)
+        return [keyword_info(keyword) for keyword in sorted(all_keywords, key=lambda k: k.name)]
+
+
+# ---------------------------------------------------------------------------
 # Registration
 # ---------------------------------------------------------------------------
 
@@ -405,6 +491,7 @@ def on_app_started(demo, app):
     print(f"[PromptKeywords] Supported keywords: {', '.join(k.name for k in all_keywords)}")
     for keyword in all_keywords:
         extra_networks.register_extra_network(keyword)
+    add_api(app)
 
 
 def on_ui_settings():
@@ -413,6 +500,14 @@ def on_ui_settings():
         shared.OptionInfo(
             False,
             "Print debug messages",
+            section=("prompt_keywords", "PromptKeywords"),
+        ),
+    )
+    shared.opts.add_option(
+        "prompt_keywords_autocomplete",
+        shared.OptionInfo(
+            True,
+            "Show keyword suggestions when typing '<' in the prompt (reload the page after changing)",
             section=("prompt_keywords", "PromptKeywords"),
         ),
     )
