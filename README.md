@@ -73,8 +73,7 @@ The extension adds the following special keywords to be used in prompts:
 
 Type `<` in a prompt box (positive or negative, txt2img or img2img) to get a list of all keywords. Typing more letters filters the list, e.g. `<cf` shows `cfg_scale`. Some keywords also suggest their values, e.g. `<sampler_name:` lists the samplers, `<checkpoint:` your checkpoints.
 
-- If [Tag Autocomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete) is installed, the keywords are added to **its** list: the keywords come first, your LoRAs follow. There is only one list, nothing is drawn on top of anything. The LoRAs keep their normal order and look.
-- Without Tag Autocomplete this extension draws its own small list (`Up` / `Down` move, `Enter` or `Tab` accept, `Esc` closes).
+- This needs [Tag Autocomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete). The keywords are added to **its** list: your LoRAs come first, the keywords follow. There is only one list, nothing is drawn on top of anything. The LoRAs keep their normal order and look. Without Tag Autocomplete there are no suggestions (the keywords themselves still work).
 - `<checkpoint:` shows your checkpoints in blue (like LoRAs) with their preview image (the same image as in the Checkpoints tab: `name.png` or `name.preview.png` next to the model file).
 - The list comes from the script itself, so new keywords appear without any extra work.
 - Can be switched off in the settings. Reload the page after changing it.

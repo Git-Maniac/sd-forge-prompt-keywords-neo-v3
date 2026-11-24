@@ -398,12 +398,12 @@ class Script(scripts.Script):
 
 
 # ---------------------------------------------------------------------------
-# Data for the autocomplete popup (javascript/prompt_keywords_autocomplete.js)
+# Data for the autocomplete list (javascript/prompt_keywords_autocomplete.js)
 # ---------------------------------------------------------------------------
 
 
 def value_choices(name):
-    # Possible values of a keyword, shown in the popup after "<name:". Empty list = free input.
+    # Possible values of a keyword, shown in the autocomplete list after "<name:". Empty list = free input.
     if name == "checkpoint":
         return sorted(info.name_for_extra for info in sd_models.checkpoints_list.values())
     if name in ("sampler_name", "hr_sampler_name"):
@@ -444,7 +444,7 @@ def value_previews(name):
 
 
 def keyword_info(keyword):
-    # Describes one keyword for the popup: its name, a short type text and where it works
+    # Describes one keyword for the autocomplete list: its name, a short type text and where it works
     if isinstance(keyword, SettingKeyword):
         type_text = TYPE_TEXTS.get(keyword.value_type, "text")
         if keyword.only_for is Txt2Img:
@@ -470,15 +470,15 @@ def keyword_info(keyword):
     }
 
 
-# Short type names for the popup (value_type function -> text)
+# Short type names for the autocomplete list (value_type function -> text)
 TYPE_TEXTS = {int: "int", float: "float", str: "text", to_bool: "true/false"}
 
 
 def add_api(app):
-    # The popup loads its keyword list from here, so the list only exists once (all_keywords)
+    # The autocomplete script loads its keyword list from here, so the list only exists once (all_keywords)
     @app.get("/prompt_keywords/keywords")
     def get_keywords():
-        # Sorted alphabetically for the popup (all_keywords itself keeps its order)
+        # Sorted alphabetically for the autocomplete list (all_keywords itself keeps its order)
         return [keyword_info(keyword) for keyword in sorted(all_keywords, key=lambda k: k.name)]
 
 
