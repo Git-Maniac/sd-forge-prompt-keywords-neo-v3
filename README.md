@@ -80,7 +80,7 @@ Type `<` in a prompt box (positive or negative, txt2img or img2img) to get a lis
 
 ## Settings
 
-Settings section `PromptKeywords` (key `prompt_keywords`) contains the options `prompt_keywords_debug` ("Print debug messages") and `prompt_keywords_autocomplete` (keyword suggestions when typing `<`).
+Settings section `Prompt Keywords` (key `prompt_keywords`) contains the options `prompt_keywords_debug` ("Print debug messages") and `prompt_keywords_autocomplete` (keyword suggestions when typing `<`).
 
 ## FORK
 

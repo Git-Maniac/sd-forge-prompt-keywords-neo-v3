@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// PromptKeywords autocomplete
+// Prompt Keywords autocomplete
 // ---------------------------------------------------------------------------
 //
 // Suggests the keywords when you type "<" in a prompt box. Typing more letters
@@ -49,7 +49,7 @@
             keywords = await response.json();
             lastLoadTime = Date.now();
         } catch (error) {
-            console.error("[PromptKeywords] Could not load keywords:", error);
+            console.error("[Prompt Keywords] Could not load keywords:", error);
         }
         loading = false;
     }
@@ -59,7 +59,7 @@
     // ------------------------------------------------------------------
 
     function autocompleteEnabled() {
-        // The setting can be switched off in Settings -> PromptKeywords
+        // The setting can be switched off in Settings -> Prompt Keywords
         if (typeof opts !== "undefined" && opts.prompt_keywords_autocomplete === false) {
             return false;
         }
@@ -320,7 +320,7 @@
             try {
                 decorateListItems(textArea, resultList);
             } catch (error) {
-                console.error("[PromptKeywords] Could not decorate the list:", error);
+                console.error("[Prompt Keywords] Could not decorate the list:", error);
             }
             return returned;
         };

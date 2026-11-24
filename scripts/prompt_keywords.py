@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------
-# PromptKeywords Forge-NEO v3
+# Prompt Keywords Forge-NEO v3
 # ---------------------------------------------------------------------------
 #
 # Based on the script RandomizerKeywords with 2 commits for 'scheduler' and 'distilled cfg scale'from:
@@ -52,7 +52,7 @@ XYZ_AXES = ("xyz_plot_x", "xyz_plot_y", "xyz_plot_z")
 def debug(message):
     # Only prints if the option "Print debug messages" is enabled in the settings
     if shared.opts.data.get("prompt_keywords_debug", False):
-        print(f"[PromptKeywords] {message}")
+        print(f"[Prompt Keywords] {message}")
 
 
 # ---------------------------------------------------------------------------
@@ -330,7 +330,7 @@ all_keywords = [
 
 class Script(scripts.Script):
     def title(self):
-        return "PromptKeywords"
+        return "Prompt Keywords"
 
     def show(self, is_img2img):
         # No own UI, always active
@@ -488,7 +488,7 @@ def add_api(app):
 
 
 def on_app_started(demo, app):
-    print(f"[PromptKeywords] Supported keywords: {', '.join(k.name for k in all_keywords)}")
+    print(f"[Prompt Keywords] Supported keywords: {', '.join(k.name for k in all_keywords)}")
     for keyword in all_keywords:
         extra_networks.register_extra_network(keyword)
     add_api(app)
@@ -500,7 +500,7 @@ def on_ui_settings():
         shared.OptionInfo(
             False,
             "Print debug messages",
-            section=("prompt_keywords", "PromptKeywords"),
+            section=("prompt_keywords", "Prompt Keywords"),
         ),
     )
     shared.opts.add_option(
@@ -508,7 +508,7 @@ def on_ui_settings():
         shared.OptionInfo(
             True,
             "Show keyword suggestions when typing '<' in the prompt (reload the page after changing)",
-            section=("prompt_keywords", "PromptKeywords"),
+            section=("prompt_keywords", "Prompt Keywords"),
         ),
     )
 
